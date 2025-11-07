@@ -1,52 +1,48 @@
-# 🎓 Student Management System (Java Swing)
+# 🎓 Student Management System (Console)
 
 ## 🧩 Overview
-This project is a **Java Swing-based graphical student management system** developed as part of a university programming assignment.  
-It allows administrators to manage student data through a user-friendly interface, supporting features such as adding, viewing, and deleting student records.  
-The program demonstrates an understanding of **object-oriented programming (OOP)**, **event-driven GUI design**, and **modular code structure** using multiple classes.
+A **Java console-based student record manager** with a clear separation of concerns:
+- **AdminUI**: user interface & input handling (menu, validation, printing)
+- **StudentManagement**: business logic & storage (static service-style API)
+- **Student**: data model (encapsulated fields + getters/setters)
+
+Admins can **add** students, **update** fields (with “press Enter to keep” semantics), **view** a single student, and **list** all students with a running total.
 
 ---
 
 ## ⚙️ Features
-- Add, view, and delete student records  
-- Display student information in a table view  
-- Clear input fields with a single button  
-- Modular design separating logic and interface (AdminUI, Student, StudentManagement)  
-- Responsive and intuitive Java Swing interface  
+- **Add new student** (ID / name / age / grade) with validation  
+  - ID/Name/Grade must be non-empty  
+  - Age must be **3–120**
+- **Update existing student** by ID  
+  - Any field may be omitted (kept as-is)  
+  - Age is range-checked (3–120)
+- **View student** details by ID (`Optional`-based lookup)
+- **List all students** and show **total count**
+- **Robust console UX**: friendly messages, invalid-input handling
 
 ---
 
 ## 🧠 Concepts Used
 
-| Concept | Description |
-|----------|-------------|
-| **Object-Oriented Programming (OOP)** | Code is structured into reusable classes: `Student`, `StudentManagement`, and `AdminUI` |
-| **Swing GUI Components** | Implements `JFrame`, `JButton`, `JLabel`, `JTextField`, and `JTable` for UI design |
-| **Event Handling** | Uses `ActionListener` to handle user input and button interactions |
-| **Collections** | Uses lists or arrays to store and manage student data dynamically |
-| **Encapsulation** | Data is managed securely through class fields and getter/setter methods |
+| Concept | Where / How |
+|---|---|
+| **Encapsulation** | `Student` has private fields + getters/setters |
+| **Separation of Concerns** | `AdminUI` (UI), `StudentManagement` (logic), `Student` (model) |
+| **Static Service Layer** | `StudentManagement.add/update/get/list/getTotal` as static API |
+| **Collections (Map/List)** | `HashMap<String, Student>` for storage; `List<Student>` for display |
+| **Optional** | `getStudent(id)` returns `Optional<Student>` for safe access |
+| **Input Validation** | Blank checks, integer parsing, age bounds (3–120) in `AdminUI` |
+| **Control Flow** | Menu loop, `switch` on string choices, early returns for invalid inputs |
+| **toString()** | `Student#toString()` produces a consistent printable record |
 
 ---
 
-## ▶️ How to Run
-
-1️⃣ Make sure all three files are in the same directory:  
-AdminUI.java
-Student.java
-StudentManagement.java
-
-
-2️⃣ Open a terminal or VS Code terminal in that directory.  
-3️⃣ Compile all Java files:  
-```bash
-javac *.java
-```
-4️⃣ Run the program (AdminUI is the main class):
-```bash
-java AdminUI
-```
+## 🗂 Project Structure
+AdminUI.java // console menu, input/validation, printing
+StudentManagement.java // static service: add/update/get/list/total using HashMap
+Student.java // data model: id, name, age, grade (+ getters/setters/toString)
 
 ## 🏫 Educational Context
 
-This project was created as part of a Computer Science course at the University of the People.
-It demonstrates the use of Java Swing for GUI development, modular architecture, and OOP principles in an educational management context.
+Built for a CS assignment to practice console I/O, validation, CRUD operations, collections (Map/List), and modular program design.
